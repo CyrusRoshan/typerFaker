@@ -8,14 +8,14 @@ Basic program, does not work with any args yet, inefficient, made quickly when I
 ###Usage:
 	> git clone https://github.com/CyrusRoshan/typerFaker.git
 	> cd typerFaker/files
-* then if using browser based typing challenge
+* if using browser based typing challenge
 	* ``` > node typerFaker.js -browser -wpm [desired wpm] ```
 	* e.g. ``` > node typerFaker.js -browser -wpm 125 ```
 
 * or if already supplying text to be typed (e.g. in another program or in a VM)
-	* ``` > node typerFaker.js -nobrowser -wait [ms to wait until starting] -wpm [desired wpm] -text [text, encapsulated in `] ```
-	* e.g. ``` > node typerFaker.js -nobrowser -wait 5000 -wpm 125 -text `string to type quickly` ```
-* otherwise, ```node typerFaker.js``` is equivalent to ```node typerFaker.js -browser -wpm 125```
+	* ``` > node typerFaker.js -nobrowser -wait [ms to wait until starting] -wpm [desired wpm] -text [text, encapsulated in quotes] ```
+	* e.g. ``` > node typerFaker.js -nobrowser -wait 5000 -wpm 125 -text "string to type quickly" ```
+* else, ```node typerFaker.js``` is equivalent to ```node typerFaker.js -browser -wpm 125```
 
 ###Options (not yet implemented)
 * ```-browser```, uses settings for browser, such as keypress activated auto script injection into current tab and keybindings for start, restart, pause, previous/next word navigation, and early exit
