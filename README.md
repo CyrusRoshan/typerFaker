@@ -22,7 +22,7 @@ Basic program, does not work with any args yet, inefficient, made quickly when I
 * ```-wpm```, sets desired wpm average
 * ```-nobrowser```, uses settings for no browser (disables keybindings used for browser, and automatic script injection)
 * ```-wait```, used in addition to ```-nobrowser``` and ```-text```, sets time in ms to wait before automatically typing
-* ```-text```, used in addition to ```-nobrowser``` and ```-wait```, supplies text to be inputted
+* ```-text```, used in addition to ```-nobrowser``` and ```-wait```, supplies text to be inputted. Text should have double quotes around it, with interior double quotes prefixed with a backslash, e.g. ```-text "\"like this\", I say"```
 * ```-lazyBrowser```, attempts to isolate the text needed to be typed, in addition to finding the correct time to begin typing
 * ```-maximumRealism```, makes the typing as humanlike as possible. Adds simple typos and corrects them, types out each word letter by letter, with faster speeds on sequential letters, slower speeds on characters requiring shift, and in effect makes longer words take longer to type on average than shorter ones.
 
