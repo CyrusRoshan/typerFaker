@@ -11,16 +11,21 @@ var selectedOptions = {
 	argsError: false,
 }
 
-/*readArgs();
+readArgs();
+//if there are no errors. Otherwise, program will quit
 if(!selectedOptions.argsError){
-	console.log(selectedOptions);
+	//if not using browser
+	if(!selectedOptions.browser){
+		setTimeout(function(){typeItOut(0, selectedOptions.textGiven.length)}, selectedOptions.wait);
+	}
+	//if user is using browser
+	else{
+
+	}
 }
 else{
-	console.log("yep an error");
-}
-*/
 
-console.log(process.argv[2] + "/" + process.argv[3]);
+}
 
 
 function readArgs(){
@@ -56,7 +61,7 @@ function readArgs(){
 
 			case "-text":
 				currentArgPos++;
-				selectedOptions.textGiven = process.argv[currentArgPos];//.replace(/"/g, '\\"');
+				selectedOptions.textGiven = process.argv[currentArgPos];
 				currentArgPos++;
 				break;
 
@@ -70,7 +75,7 @@ function readArgs(){
 				currentArgPos++;
 				break;
 
-			//effectively exits program if an argument has a typo or is invalid
+				//effectively exits program if an argument has a typo or is invalid
 			default:
 				selectedOptions.argsError = true;
 				console.log("Unknown option added, exiting program");
@@ -84,18 +89,21 @@ function readArgs(){
 	}
 }
 
-//setTimeout(typeItOut, 2000);
-
-function typeItOut(i){
-	if(i == undefined){
-		i = 0;
-	}
-	if(i < process.argv[2].split(" ").length){
-		setTimeout(function(){
-			robot.typeString(process.argv[2].split(" ")[i].replace(/'/g, "\'").replace(/\"/g, '"'));
-			robot.keyTap("space");
-			typeItOut(i+1);
-		}, getWPMof(110));
+function typeItOut(i, length){
+	if(i < length){
+		//basically just go through and type all of the letters in a word at what would be the exact given wpm if calculation/comparison time was 0
+		setInterval(function(){
+			while(selectedOptions.textGiven[i+1] != " " && i < length){
+				//so we don't type the backslash that comes before the double quotes, but is actually single quotes because of how the strings end up being stored
+				if(selectedOptions.textGiven[i] == "\\" && selectedOptions.textGiven[i+1] == "'"){
+					i++;
+				}
+				console.log(selectedOptions.textGiven[i]);
+				//robot.typeString(selectedOptions.textGiven[i]);
+				//robot.keyTap("space");
+				typeItOut(i+1);
+			}
+		}, getWPMof(selectedOptions.wpm))
 	}
 }
 
