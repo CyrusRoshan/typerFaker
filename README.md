@@ -20,9 +20,8 @@ Basic program, does not work with any args yet, inefficient, made quickly when I
 ###Options (not yet implemented)
 * ```--browser``` or ```-b```, uses settings for browser, such as keypress activated auto script injection into current tab and keybindings for start, restart, pause, previous/next word navigation, and early exit
 * ```--wpm``` or ```-w```, sets desired wpm average
-* ```--nobrowser``` or ```-n```, uses settings for no browser (disables keybindings used for browser, and automatic script injection)
-* ```--wait``` or ```-p```, used in addition to ```-nobrowser``` and ```-text```, sets time in ms to wait before automatically typing
-* ```--text``` or ```-t```, used in addition to ```-nobrowser``` and ```-wait```, supplies text to be inputted. Text should have double quotes around it, with interior double quotes prefixed with a backslash, e.g. ```-text "\"like this\", I say"```
+* ```--wait``` or ```-p```, used in addition to ```-text```, sets time in ms to wait before automatically typing
+* ```--text``` or ```-t```, used in addition to ```-wait```, supplies text to be inputted. Text should have double quotes around it, with interior double quotes prefixed with a backslash, e.g. ```-text "\"like this\", I say"```
 * ```--lazybrowser``` or ```-l```, attempts to isolate the text needed to be typed, in addition to finding the correct time to begin typing
 * ```--maximumrealism``` or ```-m```, makes the typing as humanlike as possible. Adds simple typos and corrects them, types out each word letter by letter, with faster speeds on sequential letters, slower speeds on characters requiring shift, and in effect makes longer words take longer to type on average than shorter ones.
 
