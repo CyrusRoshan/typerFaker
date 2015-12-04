@@ -1,3 +1,4 @@
+var Promise = require("bluebird");
 var robot = require("robotjs");
 
 //global argument values, parsed
@@ -8,8 +9,8 @@ var selectedOptions = {
 	textGiven: false,
 	lazyBrowser: false,
 	maximumRealism: false,
-	argsError: false,
-}
+	argsError: false
+};
 
 readArgs();
 //if there are no errors. Otherwise, program will quit
@@ -90,20 +91,32 @@ function readArgs(){
 }
 
 function typeItOut(i, length){
+	var currentWord;
+	var j;
+	//basically just go through and type all of the letters in a word at what would be the exact given wpm if calculation/comparison time was 0
+
+	//fix this function
 	if(i < length){
-		//basically just go through and type all of the letters in a word at what would be the exact given wpm if calculation/comparison time was 0
 		setInterval(function(){
-			while(selectedOptions.textGiven[i+1] != " " && i < length){
-				//so we don't type the backslash that comes before the double quotes, but is actually single quotes because of how the strings end up being stored
-				if(selectedOptions.textGiven[i] == "\\" && selectedOptions.textGiven[i+1] == "'"){
-					i++;
-				}
-				console.log(selectedOptions.textGiven[i]);
-				//robot.typeString(selectedOptions.textGiven[i]);
-				//robot.keyTap("space");
-				typeItOut(i+1);
+			typeWord();
+		}, getSpeedOfVariedWPM(selectedOptions.wpm))
+	}
+
+	function typeWord(){
+		currentWord = selectedOptions.textGiven.substr(i).split(" ")[0];
+		for(j = 0; j < currentWord.length; j++){
+			//so we don't type the backslash that comes before the double quotes, but is actually single quotes because of how the strings end up being stored
+			if(selectedOptions.textGiven[i] == "\\" && selectedOptions.textGiven[i+1] == "'"){
+				j++;
 			}
-		}, getWPMof(selectedOptions.wpm))
+			//print the current letter in the current word
+			console.log(currentWord[j]);
+			//robot.typeString(selectedOptions.textGiven[i]);
+			//robot.keyTap("space");
+		}
+
+		//move i past the current length of the word plus a space
+		i += currentWord.length + 1;
 	}
 }
 
@@ -112,6 +125,13 @@ function scaleRand(min, max) {
 	return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-function getWPMof(wpm){
+
+function getSpeedOfWPM(wpm){
 	return wpm * 60 * 1000;
+}
+
+function getSpeedOfVariedWPM(wpm, maxVariance){
+	//for example, wpm of 100 and maxVariance of .25 would produce values ranging from 75 to 125 wpm
+	//because [wpm speed] * [random between 0 and 1] * (1 + .25) + (1 - .25)
+	return getSpeedOfWPM(wpm) * Math.random() / (1 + variance) + (1 - maxVariance);
 }
