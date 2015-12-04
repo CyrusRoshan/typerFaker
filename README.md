@@ -15,7 +15,7 @@ Basic program, does not work with any args yet, inefficient, made quickly when I
 * or if already supplying text to be typed (e.g. in another program or in a VM)
 	* ``` > node typerFaker.js -nobrowser -wait [ms to wait until starting] -wpm [desired wpm] -text [text, encapsulated in quotes] ```
 	* e.g. ``` > node typerFaker.js -nobrowser -wait 5000 -wpm 125 -text "string to type quickly" ```
-* else, ```node typerFaker.js``` is equivalent to ```node typerFaker.js -browser -wpm 125```
+* else, ```node typerFaker.js``` is equivalent to ```node typerFaker.js -wpm 125```
 
 ###Options (not yet implemented)
 * ```--browser``` or ```-b```, uses settings for browser, such as keypress activated auto script injection into current tab and keybindings for start, restart, pause, previous/next word navigation, and early exit
