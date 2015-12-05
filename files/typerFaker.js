@@ -48,33 +48,32 @@ function typeItOut(programArgs){
 
 	var words = text.split(" ");
 
-	typeText(0);
+	typeText(words[0], 0, words.length, 0);
 
-	function typeText(i){
-		if(i < words.length){
-			typeWord(words[i], 0, i);
-		}
-	}
-
-	function typeWord(word, j, i){
-		//so we don't type the backslash that comes before quotes (of either type)
+	function typeText(word, j, totalWords, i){
 		if(j < word.length){
+			//skip backslashes that were used to escape quotes
 			if(word[j] === "\\" && (word[j+1] === "'" || word[j+1] === "\"")){
-				typeWord(word, j, i);
+				typeText(word, j+1, totalWords, i);
 			}
+			//else print the current letter
 			else{
-				//print the current letter
 				setTimeout(function(){
 					console.log(word[j]);
-					typeWord(word, j+1, i);
+					typeText(word, j+1, totalWords, i);
 				}, 500);
 			}
 		}
 		else{
 			//type the next word
-			typeText(i+1);
+			if(i+1 < words.length){
+				setTimeout(function(){
+					console.log(" ");
+					typeText(words[i+1], 0, totalWords, i+1)
+				}, 500);
+			}
 		}
-	};
+	}
 }
 
 
