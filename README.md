@@ -2,8 +2,13 @@
 Fake your wpm in typing races
 ___
 
-###Current status:
-Basic program, does not work with any args yet, inefficient, made quickly when I should have been working on my team's hackathon project.
+###Current status (Under development):
+Program works outside of the browser with the ```--wait``` and ```--text``` commands.
+
+All output is currently in the console via console.log. Simply substitute robot.js's functions to type instead.
+
+Coming next: browser support (automatic script injection and typing activated hotkeys).
+
 
 ###Usage:
 	> git clone https://github.com/CyrusRoshan/typerFaker.git
