@@ -8,7 +8,12 @@ function main(){
 	var programArgs = readArgs();
 	if(!(programArgs.text == undefined ^ programArgs.wait == undefined)){
 		if(!programArgs.browser){
-			typeItOut(programArgs);
+			setTimeout(function(){
+				typeItOut(programArgs);
+			}, programArgs.wait);
+		}
+		else{
+
 		}
 	}
 	else{
@@ -41,7 +46,7 @@ function readArgs(){
 }
 
 function typeItOut(programArgs){
-	//basically just go through and type all of the letters in a word at what would be the exact given wpm if calculation/comparison time was 0
+	//basically just go through and type all of the letters in a word at what would be the average given wpm (with variance) if calculation/comparison time was 0
 	var text = programArgs.text;
 	var wpm = programArgs.wpm;
 	var mr = programArgs.maximumrealism;
@@ -50,6 +55,7 @@ function typeItOut(programArgs){
 
 	typeText(words[0], 0, words.length, 0);
 
+	//type text, one word at a time. Recursive, so it types all of the words with the above function call
 	function typeText(word, j, totalWords, i){
 		if(j < word.length){
 			//skip backslashes that were used to escape quotes
