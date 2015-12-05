@@ -6,8 +6,13 @@ main();
 
 function main(){
 	var programArgs = readArgs();
-	if(programArgs.nobrowser){
-		setTimeout(function(){typeItOut(programArgs)}, programArgs.wait);
+	if(!(programArgs.text == undefined ^ programArgs.wait == undefined)){
+		if(!programArgs.browser){
+			typeItOut(programArgs);
+		}
+	}
+	else{
+		console.log("\nError, must either include both wait (-p) and text (-t) parameters or include neither. Exiting.\n")
 	}
 }
 
@@ -18,13 +23,19 @@ function readArgs(){
 		.version('0.0.1')
 		.usage('[options]')
 		.option('-b, --browser', 'Uses settings for browser, such as keypress activated auto script injection into current tab and keybindings for start, restart, pause, previous/next word navigation, and early exit')
-		.option('-n, --nobrowser', 'Uses settings for no browser (disables keybindings used for browser, and automatic script injection)')
 		.option('-w, --wpm <n>', 'Desired avg wpm to type at', parseInt)
-		.option('-p, --wait <n>', 'Used in addition to --nobrowser and --text. Sets time in ms to wait before automatically typing', parseInt)
-		.option('-t, --text [value]', 'Used in addition to --nobrowsesr and --wait. Supplies text to be inputted. Text should have double quotes around it, with interior double quotes prefixed with a backslash, e.g. -text "\"like this\", I say"')
+		.option('-p, --wait <n>', 'Used in addition to --text. Sets time in ms to wait before automatically typing', parseInt)
+		.option('-t, --text [value]', 'Used in addition to --wait. Supplies text to be inputted. Text should have double quotes around it, with interior double quotes prefixed with a backslash, e.g. -text "\"like this\", I say"')
 		.option('-l, --lazybrowser', 'Attempts to isolate the text needed to be typed, in addition to finding the correct time to begin typing')
 		.option('-m, --maximumrealism', 'Makes the typing as humanlike as possible. Adds simple typos and corrects them, types out each word letter by letter, with faster speeds on sequential letters, slower speeds on characters requiring shift, and in effect makes longer words take longer to type on average than shorter ones.')
 		.parse(process.argv);
+
+	if(programArgs.wpm <= 0 || !programArgs.wpm){
+		programArgs.wpm = 125;
+	}
+	if(programArgs.wait < 0){
+		programArgs.wait = 0;
+	}
 
 	return programArgs;
 }
@@ -35,32 +46,37 @@ function typeItOut(programArgs){
 	var wpm = programArgs.wpm;
 	var mr = programArgs.maximumrealism;
 
-	//fix this function
-	function callTyper(){
-		if(i < length){
-			setTimeout(function(){
-				typeWord();
-			}, getSpeedOfVariedWPM(selectedOptions.wpm))
+	var words = text.split(" ");
+
+	typeText(0);
+
+	function typeText(i){
+		if(i < words.length){
+			typeWord(words[i], 0, i);
 		}
 	}
 
-	function typeWord(){
-		var currentWord = selectedOptions.textGiven.substr(i).split(" ")[0];
-		for(var j = 0; j < currentWord.length; j++){
-			//so we don't type the backslash that comes before the double quotes, but is actually single quotes because of how the strings end up being stored
-			if(selectedOptions.textGiven[i] === "\\" && selectedOptions.textGiven[i+1] === "'"){
-				j++;
+	function typeWord(word, j, i){
+		//so we don't type the backslash that comes before quotes (of either type)
+		if(j < word.length){
+			if(word[j] === "\\" && (word[j+1] === "'" || word[j+1] === "\"")){
+				typeWord(word, j, i);
 			}
-			//print the current letter in the current word
-			console.log(currentWord[j]);
-			//robot.typeString(selectedOptions.textGiven[i]);
-			//robot.keyTap("space");
+			else{
+				//print the current letter
+				setTimeout(function(){
+					console.log(word[j]);
+					typeWord(word, j+1, i);
+				}, 500);
+			}
 		}
-
-		//move i past the current length of the word plus a space
-		i += currentWord.length + 1;
-	}
+		else{
+			//type the next word
+			typeText(i+1);
+		}
+	};
 }
+
 
 
 function scaleRand(min, max) {
