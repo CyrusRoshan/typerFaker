@@ -61,7 +61,7 @@ function typeItOut(programArgs){
 				setTimeout(function(){
 					console.log(word[j]);
 					typeText(word, j+1, totalWords, i);
-				}, 500);
+				}, getSpeedOfVariedWPM(wpm, 0.2)/(words.length+1));
 			}
 		}
 		else{
@@ -70,7 +70,7 @@ function typeItOut(programArgs){
 				setTimeout(function(){
 					console.log(" ");
 					typeText(words[i+1], 0, totalWords, i+1)
-				}, 500);
+				}, getSpeedOfVariedWPM(wpm, 0.2)/(words.length+1));
 			}
 		}
 	}
@@ -84,11 +84,11 @@ function scaleRand(min, max) {
 
 
 function getSpeedOfWPM(wpm){
-	return wpm * 60 * 1000;
+	return 60000 / wpm;
 }
 
 function getSpeedOfVariedWPM(wpm, maxVariance){
 	//for example, wpm of 100 and maxVariance of .25 would produce values ranging from 75 to 125 wpm
 	//because [wpm speed] * [random between 0 and 1] * (1 + .25) + (1 - .25)
-	return getSpeedOfWPM(wpm) * Math.random() / (1 + variance) + (1 - maxVariance);
+	return getSpeedOfWPM(wpm) * Math.random() / (1 + maxVariance) + (1 - maxVariance);
 }
