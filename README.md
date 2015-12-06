@@ -23,8 +23,9 @@ Coming next: browser support (automatic script injection and typing activated ho
 * else, ```node typerFaker.js``` is equivalent to ```node typerFaker.js -wpm 125```
 
 ###Options (not yet implemented)
-* ```--browser``` or ```-b```, uses settings for browser, such as keypress activated auto script injection into current tab and keybindings for start, restart, pause, previous/next word navigation, and early exit
+* ```--browser``` or ```-b```, uses settings for browser, such as keypress activated auto script injection into current tab and keybindings for start, restart, pause, previous/next word navigation, and early exit. Not intended to be used with ```--wait``` or ```--text```
 * ```--wpm``` or ```-w```, sets desired wpm average
+* ```--variance``` or ```-v```, sets desired variance for each character's typing speed. (0 <= x < 1) E.g. a variance of 0.5 will give speeds from 0.5 to 1.5 times the speed for each character, and will average out to the desired wpm
 * ```--wait``` or ```-p```, used in addition to ```-text```, sets time in ms to wait before automatically typing
 * ```--text``` or ```-t```, used in addition to ```-wait```, supplies text to be inputted. Text should have double quotes around it, with interior double quotes prefixed with a backslash, e.g. ```-text "\"like this\", I say"```
 * ```--lazybrowser``` or ```-l```, attempts to isolate the text needed to be typed, in addition to finding the correct time to begin typing
