@@ -1,0 +1,26 @@
+{
+	"name": "typerFaker",
+	"version": "0.1.0",
+	"description": "Fake your wpm in typing races",
+	"main": "files/typerFaker.js",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/CyrusRoshan/typerFaker.git"
+	},
+	"keywords": [
+		"wpm",
+		"typing",
+		"race"
+	],
+	"dependencies": {
+		"bluebird": "3.0.x",
+		"robotjs": "0.3.4",
+		"commander": "2.9.0"
+	},
+	"author": "Cyrus Roshan <hello@cyrusroshan.com>",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/CyrusRoshan/typerFaker/issues"
+	},
+	"homepage": "https://github.com/CyrusRoshan/typerFaker#readme"
+}
