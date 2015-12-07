@@ -2,7 +2,9 @@
 Fake your wpm in typing races
 ___
 
-###Current status (Under development):
+###Current status (On hold):
+Paused until robotjs can read global input
+
 Program works outside of the browser with the ```--wait``` and ```--text``` commands.
 
 All output is currently in the console via console.log. Simply substitute robot.js's functions to type instead.
@@ -14,13 +16,13 @@ Coming next: browser support (automatic script injection and typing activated ho
 	> git clone https://github.com/CyrusRoshan/typerFaker.git
 	> cd typerFaker/files
 * if using browser based typing challenge
-	* ``` > node typerFaker.js -browser -wpm [desired wpm] ```
+	* ``` > node typerFaker.js -b -w [desired wpm] -v [desired variance]```
 	* e.g. ``` > node typerFaker.js -browser -wpm 125 ```
 
 * or if already supplying text to be typed (e.g. in another program or in a VM)
-	* ``` > node typerFaker.js -nobrowser -wait [ms to wait until starting] -wpm [desired wpm] -text [text, encapsulated in quotes] ```
-	* e.g. ``` > node typerFaker.js -nobrowser -wait 5000 -wpm 125 -text "string to type quickly" ```
-* else, ```node typerFaker.js``` is equivalent to ```node typerFaker.js -wpm 125```
+	* ``` > node typerFaker.js -p [ms to wait until starting] -w [desired wpm] -v [desired variance] -t [text, encapsulated in quotes] ```
+	* e.g. ``` > node typerFaker.js -p 5000 -w 125 -v [0.5] -t "string to type quickly" ```
+* else, ```node typerFaker.js``` is equivalent to ```node typerFaker.js -w 125```
 
 ###Options (not yet implemented)
 * ```--browser``` or ```-b```, uses settings for browser, such as keypress activated auto script injection into current tab and keybindings for start, restart, pause, previous/next word navigation, and early exit. Not intended to be used with ```--wait``` or ```--text```

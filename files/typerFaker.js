@@ -16,7 +16,8 @@ function main(){
 			console.log("\nError, browser (-b) is not intended to be used with the wait (-p) and text (-t) parameters. Exiting.\n")
 		}
 		else{
-
+			console.log("\nSwitch to browser and type CTRL+I\nThen, copy the text you wish to type\nWhen you want to start typing, click the input box on the webpage to begin");
+			//injectScript();
 		}
 	}
 	else{
